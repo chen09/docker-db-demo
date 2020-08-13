@@ -1,0 +1,16 @@
+version: '3.7'
+services:
+  db:
+    build: ./sql
+    container_name: mysql_demo
+    ports:
+      - ${DB_PORT}:3306
+    volumes:
+      - ./db/mysql_data:/var/lib/mysql
+      - ./db/mysql_init:/docker-entrypoint-initdb.d
+      - ./db/mysql_log:/var/log/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASS}
+      - MYSQL_USER=${DB_USER}
+      - MYSQL_PASSWORD=${DB_PASS}
+      - MYSQL_DATABASE=${DB_NAME}
